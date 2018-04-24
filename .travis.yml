@@ -2,7 +2,14 @@ sudo: required
 language: java
 jdk:
  - oraclejdk8
+services:
+ - docker
 
 install: true
 
 script: mvn package
+
+deploy:
+ - mvn docker:build
+ - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+ - docker push alexroman5g/rentify

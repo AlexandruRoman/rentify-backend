@@ -9,7 +9,7 @@ install: true
 
 script: mvn package
 
-deploy:
+after_deploy:
  - mvn docker:build
  - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
  - docker push alexroman5g/rentify

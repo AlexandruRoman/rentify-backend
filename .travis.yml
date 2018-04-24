@@ -11,5 +11,5 @@ script: mvn package
 
 deploy:
   provider: script
-  script: "mvn docker:build && docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS && docker push alexroman5g/rentify"
+  script: "mvn docker:build && docker login -u $DOCKER_USER -p $DOCKER_PASS && docker push alexroman5g/rentify"
   skip_cleanup: true

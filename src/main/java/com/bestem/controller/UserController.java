@@ -14,11 +14,6 @@ public class UserController {
     @Autowired
     UserRepository userRepository;
 
-    @PostMapping("/signup")
-    public void signup(@RequestBody final User user){
-        userRepository.save(user);
-    }
-
     @GetMapping("/all")
     public List<User> getAllUsers(){
         return userRepository.findAll();

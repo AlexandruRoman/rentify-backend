@@ -18,6 +18,7 @@ public class Sport {
     @OneToMany(mappedBy = "sport")
     private Set<LegaturaLocatieSport> legaturiLocatieSport;
 
+    public Sport(){}
     public Sport(String nume) {
         this.nume = nume;
     }

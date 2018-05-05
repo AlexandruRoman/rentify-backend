@@ -22,6 +22,8 @@ public class Locatie {
     @OneToMany(mappedBy = "locatie", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<LegaturaLocatieSport> legaturiLocatieSport;
 
+    public Locatie(){}
+
     public Locatie(String nume, Companie companie) {
         this.nume = nume;
         this.companie = companie;

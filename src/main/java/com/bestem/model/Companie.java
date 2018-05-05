@@ -2,6 +2,8 @@ package com.bestem.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.awt.*;
+import java.net.CookieManager;
 import java.util.Set;
 
 /**
@@ -20,6 +22,8 @@ public class Companie {
 
     @OneToMany(mappedBy = "companie", cascade = CascadeType.ALL)
     private Set<Locatie> locatii;
+
+    public Companie(){}
 
     public Companie(String nume) {
         this.nume = nume;

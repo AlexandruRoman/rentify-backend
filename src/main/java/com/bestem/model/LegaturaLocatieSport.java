@@ -24,6 +24,7 @@ public class LegaturaLocatieSport {
 
     private long nrLocuri;
 
+    public LegaturaLocatieSport(){}
     public LegaturaLocatieSport(String nume, Sport sport, Locatie locatie, long nrLocuri) {
         this.nume = nume;
         this.sport = sport;

@@ -23,6 +23,8 @@ public class Rezervare {
 
     private Date end;
 
+    public Rezervare(){}
+
     public Rezervare(long idLegatura, User user, Date start, Date end) {
         this.idLegatura = idLegatura;
         this.user = user;

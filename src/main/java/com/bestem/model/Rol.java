@@ -1,5 +1,8 @@
 package com.bestem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.NaturalId;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -13,12 +16,17 @@ public class Rol {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private String nume;
+    @Enumerated(EnumType.STRING)
+    @NaturalId
+    @Column(length = 60)
+    private NumeRol nume;
 
     @OneToMany(mappedBy = "rol", cascade = CascadeType.ALL)
     private Set<User> users;
 
-    public Rol(String nume) {
+    public Rol(){}
+
+    public Rol(NumeRol nume) {
         this.nume = nume;
     }
 
@@ -30,14 +38,15 @@ public class Rol {
         this.id = id;
     }
 
-    public String getNume() {
+    public NumeRol getNume() {
         return nume;
     }
 
-    public void setNume(String nume) {
+    public void setNume(NumeRol nume) {
         this.nume = nume;
     }
 
+    @JsonIgnore
     public Set<User> getUsers() {
         return users;
     }

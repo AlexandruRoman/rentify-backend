@@ -1,6 +1,6 @@
 package com.bestem.controller;
 
-import com.bestem.model.NumeRol;
+import com.bestem.model.RoleName;
 import com.bestem.model.User;
 import com.bestem.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,19 +21,19 @@ public class AuthController {
 
     @PostMapping("/user/signup")
     public String userSignup(@RequestBody final User signUpRequest){
-        return authService.signup(signUpRequest, NumeRol.ROLE_USER);
+        return authService.signup(signUpRequest, RoleName.ROLE_USER);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/staff/signup")
     public String staffSignup(@RequestBody final User signUpRequest){
-        return authService.signup(signUpRequest, NumeRol.ROLE_STAFF);
+        return authService.signup(signUpRequest, RoleName.ROLE_STAFF);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/admin/signup")
     public String adminSignup(@RequestBody final User signUpRequest){
-        return authService.signup(signUpRequest, NumeRol.ROLE_ADMIN);
+        return authService.signup(signUpRequest, RoleName.ROLE_ADMIN);
     }
 
     @PreAuthorize("hasRole('USER')")

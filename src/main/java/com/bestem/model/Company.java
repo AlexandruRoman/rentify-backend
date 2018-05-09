@@ -1,26 +1,32 @@
 package com.bestem.model;
 
 import javax.persistence.*;
-import java.util.Date;
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by Alex on 2/20/2018.
  */
 @Entity
-@Table(name = "sport")
-public class Sport {
+@Table(name = "companie")
+public class Company {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private long idCompany;
-    private String name;
-    private String avatar;
-    private String description;
-    private long capacity;
+    @NotNull
+    private long idLocation;
 
-    public Sport(){}
-    public Sport(String name) {
+    private String avatar;
+
+    private String description;
+
+    @NotNull
+    private String name;
+
+    public Company(){}
+
+    public Company(String name) {
         this.name = name;
     }
 
@@ -40,12 +46,12 @@ public class Sport {
         this.name = name;
     }
 
-    public long getIdCompany() {
-        return idCompany;
+    public long getIdLocation() {
+        return idLocation;
     }
 
-    public void setIdCompany(long idCompany) {
-        this.idCompany = idCompany;
+    public void setIdLocation(long idLocation) {
+        this.idLocation = idLocation;
     }
 
     public String getAvatar() {
@@ -62,13 +68,5 @@ public class Sport {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public long getCapacity() {
-        return capacity;
-    }
-
-    public void setCapacity(long capacity) {
-        this.capacity = capacity;
     }
 }

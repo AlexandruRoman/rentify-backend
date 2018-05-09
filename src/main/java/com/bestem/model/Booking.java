@@ -8,26 +8,22 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "rezervare")
-public class Rezervare {
+public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private long idLegatura;
-
-    @ManyToOne
-    @JoinColumn(name = "id_user")
-    private User user;
-
+    private long idSport;
+    private long idUser;
     private Date start;
-
     private Date end;
+    private BookingStatus status;
 
-    public Rezervare(){}
+    public Booking(){}
 
-    public Rezervare(long idLegatura, User user, Date start, Date end) {
-        this.idLegatura = idLegatura;
-        this.user = user;
+    public Booking(long idSport, long idUser, Date start, Date end) {
+        this.idSport = idSport;
+        this.idUser = idUser;
         this.start = start;
         this.end = end;
     }
@@ -38,14 +34,6 @@ public class Rezervare {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public long getIdLegatura() {
-        return idLegatura;
-    }
-
-    public void setIdLegatura(long idLegatura) {
-        this.idLegatura = idLegatura;
     }
 
     public Date getStart() {
@@ -64,11 +52,27 @@ public class Rezervare {
         this.end = end;
     }
 
-    public User getUser() {
-        return user;
+    public long getIdSport() {
+        return idSport;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setIdSport(long idSport) {
+        this.idSport = idSport;
+    }
+
+    public long getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(long idUser) {
+        this.idUser = idUser;
+    }
+
+    public BookingStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(BookingStatus status) {
+        this.status = status;
     }
 }

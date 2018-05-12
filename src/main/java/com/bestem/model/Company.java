@@ -1,21 +1,26 @@
 package com.bestem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 /**
  * Created by Alex on 2/20/2018.
  */
 @Entity
-@Table(name = "companie")
+@Table(name = "company")
 public class Company {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @NotNull
-    private long idLocation;
+//    @JsonIgnore
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name = "location_id")
+    private Location location;
 
     private String avatar;
 
@@ -46,14 +51,6 @@ public class Company {
         this.name = name;
     }
 
-    public long getIdLocation() {
-        return idLocation;
-    }
-
-    public void setIdLocation(long idLocation) {
-        this.idLocation = idLocation;
-    }
-
     public String getAvatar() {
         return avatar;
     }
@@ -68,5 +65,13 @@ public class Company {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 }

@@ -1,5 +1,6 @@
 package com.bestem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.NaturalId;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
@@ -31,6 +32,10 @@ public class User {
     @NotBlank
     @Size(max = 100)
     private String password;
+
+    @JsonIgnore
+    @OneToMany(cascade ={CascadeType.ALL}, mappedBy = "user")
+    private Set<Booking> bookings;
 
     public User() {
     }
@@ -80,5 +85,13 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public Set<Booking> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(Set<Booking> bookings) {
+        this.bookings = bookings;
     }
 }

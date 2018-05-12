@@ -1,7 +1,10 @@
 package com.bestem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * Created by Alex on 2/20/2018.
@@ -18,6 +21,10 @@ public class Sport {
     private String avatar;
     private String description;
     private long capacity;
+
+    @JsonIgnore
+    @OneToMany(cascade ={CascadeType.ALL}, mappedBy = "sport")
+    private Set<Booking> bookings;
 
     public Sport(){}
     public Sport(String name) {
@@ -70,5 +77,13 @@ public class Sport {
 
     public void setCapacity(long capacity) {
         this.capacity = capacity;
+    }
+
+    public Set<Booking> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(Set<Booking> bookings) {
+        this.bookings = bookings;
     }
 }

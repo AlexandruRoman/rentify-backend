@@ -1,12 +1,15 @@
 package com.bestem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Created by Alex on 2/20/2018.
  */
 @Entity
-@Table(name = "locatie")
+@Table(name = "location")
 public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -15,6 +18,10 @@ public class Location {
     private String name;
 
     private String avatar;
+
+    @JsonIgnore
+    @OneToMany(cascade ={CascadeType.ALL}, mappedBy = "company")
+    private Set<Company> companies;
 
     public Location(){}
 
@@ -44,5 +51,13 @@ public class Location {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public Set<Company> getCompanies() {
+        return companies;
+    }
+
+    public void setCompanies(Set<Company> companies) {
+        this.companies = companies;
     }
 }

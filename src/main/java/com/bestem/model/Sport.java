@@ -16,11 +16,15 @@ public class Sport {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private long idCompany;
     private String name;
     private String avatar;
     private String description;
     private long capacity;
+
+//    @JsonIgnore
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name = "company_id")
+    private Company company;
 
     @JsonIgnore
     @OneToMany(cascade ={CascadeType.ALL}, mappedBy = "sport")
@@ -45,14 +49,6 @@ public class Sport {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public long getIdCompany() {
-        return idCompany;
-    }
-
-    public void setIdCompany(long idCompany) {
-        this.idCompany = idCompany;
     }
 
     public String getAvatar() {
@@ -85,5 +81,13 @@ public class Sport {
 
     public void setBookings(Set<Booking> bookings) {
         this.bookings = bookings;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 }

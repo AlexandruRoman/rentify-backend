@@ -22,6 +22,10 @@ public class Company {
     @JoinColumn(name = "location_id")
     private Location location;
 
+    @JsonIgnore
+    @OneToMany(cascade ={CascadeType.ALL}, mappedBy = "sport")
+    private Set<Sport> sports;
+
     private String avatar;
 
     private String description;
@@ -73,5 +77,13 @@ public class Company {
 
     public void setLocation(Location location) {
         this.location = location;
+    }
+
+    public Set<Sport> getSports() {
+        return sports;
+    }
+
+    public void setSports(Set<Sport> sports) {
+        this.sports = sports;
     }
 }

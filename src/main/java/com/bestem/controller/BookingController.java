@@ -4,6 +4,7 @@ import com.bestem.model.Booking;
 import com.bestem.repository.BookingRepository;
 import com.bestem.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -50,6 +51,7 @@ public class BookingController {
         bookingRepository.delete(id);
     }
 
+    @PreAuthorize("hasRole('STAFF')")
     @PutMapping("/accept/{id}")
     public void accept(@PathVariable final long id) { bookingService.accept(id); }
 }

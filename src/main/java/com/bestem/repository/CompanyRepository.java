@@ -11,5 +11,5 @@ import java.util.List;
  */
 @Component
 public interface CompanyRepository extends JpaRepository<Company, Long>{
-    List<Company> findAllByIdLocation(long id);
+    List<Company> findAllByLocationId(long id);
 }

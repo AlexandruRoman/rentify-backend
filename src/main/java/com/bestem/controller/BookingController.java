@@ -2,6 +2,7 @@ package com.bestem.controller;
 
 import com.bestem.model.Booking;
 import com.bestem.repository.BookingRepository;
+import com.bestem.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,8 +12,13 @@ import java.util.List;
 @RequestMapping("/booking")
 public class BookingController {
 
-    @Autowired
-    BookingRepository bookingRepository;
+    private BookingRepository bookingRepository;
+    private BookingService bookingService;
+
+    public BookingController(BookingRepository bookingRepository, BookingService bookingService) {
+        this.bookingRepository = bookingRepository;
+        this.bookingService = bookingService;
+    }
 
     @GetMapping("/all")
     public List<Booking> getAll(){
@@ -26,12 +32,12 @@ public class BookingController {
 
     @GetMapping("/parent/{id}")
     public List<Booking> getByParent(@PathVariable final long id){
-        return bookingRepository.findAllByIdSport(id);
+        return bookingRepository.findAllBySportId(id);
     }
 
     @GetMapping("/user/{id}")
     public List<Booking> getByUser(@PathVariable final long id){
-        return bookingRepository.findAllByIdUser(id);
+        return bookingRepository.findAllByUserId(id);
     }
 
     @PostMapping("/add")
@@ -43,4 +49,7 @@ public class BookingController {
     public void delete(@PathVariable final long id){
         bookingRepository.delete(id);
     }
+
+    @PutMapping("/accept/{id}")
+    public void accept(@PathVariable final long id) { bookingService.accept(id); }
 }

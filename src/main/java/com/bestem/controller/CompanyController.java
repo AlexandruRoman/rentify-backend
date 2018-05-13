@@ -11,8 +11,11 @@ import java.util.List;
 @RequestMapping("/company")
 public class CompanyController {
 
-    @Autowired
-    CompanyRepository companyRepository;
+    private CompanyRepository companyRepository;
+
+    public CompanyController(CompanyRepository companyRepository) {
+        this.companyRepository = companyRepository;
+    }
 
     @GetMapping("/all")
     public List<Company> getAll(){
@@ -26,7 +29,7 @@ public class CompanyController {
 
     @GetMapping("/parent/{id}")
     public List<Company> getByParent(@PathVariable final long id){
-        return companyRepository.findAllByIdLocation(id);
+        return companyRepository.findAllByLocationId(id);
     }
 
     @PostMapping("/add")

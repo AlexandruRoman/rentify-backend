@@ -11,5 +11,5 @@ import java.util.List;
  */
 @Component
 public interface SportRepository extends JpaRepository<Sport, Long>{
-    List<Sport> findAllByIdCompany(long id);
+    List<Sport> findAllByCompanyId(long id);
 }

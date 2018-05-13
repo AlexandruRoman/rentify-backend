@@ -11,8 +11,11 @@ import java.util.List;
 @RequestMapping("/location")
 public class LocationController {
 
-    @Autowired
     LocationRepository locationRepository;
+
+    public LocationController(LocationRepository locationRepository) {
+        this.locationRepository = locationRepository;
+    }
 
     @GetMapping("/all")
     public List<Location> getAll(){

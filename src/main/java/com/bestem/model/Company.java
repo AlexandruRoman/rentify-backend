@@ -23,7 +23,7 @@ public class Company {
     private Location location;
 
     @JsonIgnore
-    @OneToMany(cascade ={CascadeType.ALL}, mappedBy = "sport")
+    @OneToMany(cascade ={CascadeType.ALL}, mappedBy = "company")
     private Set<Sport> sports;
 
     private String avatar;

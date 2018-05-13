@@ -20,7 +20,7 @@ public class Location {
     private String avatar;
 
     @JsonIgnore
-    @OneToMany(cascade ={CascadeType.ALL}, mappedBy = "company")
+    @OneToMany(cascade ={CascadeType.ALL}, mappedBy = "location")
     private Set<Company> companies;
 
     public Location(){}

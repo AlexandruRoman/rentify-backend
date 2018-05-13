@@ -11,8 +11,11 @@ import java.util.List;
 @RequestMapping("/sport")
 public class SportController {
 
-    @Autowired
     SportRepository sportRepository;
+
+    public SportController(SportRepository sportRepository) {
+        this.sportRepository = sportRepository;
+    }
 
     @GetMapping("/all")
     public List<Sport> getAll(){
@@ -26,7 +29,7 @@ public class SportController {
 
     @GetMapping("/parent/{id}")
     public List<Sport> getByParent(@PathVariable final long id){
-        return sportRepository.findAllByIdCompany(id);
+        return sportRepository.findAllByCompanyId(id);
     }
 
     @PostMapping("/add")

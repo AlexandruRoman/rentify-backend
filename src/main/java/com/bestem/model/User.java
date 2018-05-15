@@ -1,5 +1,6 @@
 package com.bestem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.NaturalId;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
@@ -20,12 +21,9 @@ public class User {
 
     private String username;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private Set<Rezervare> rezervari;
-
     @ManyToOne
-    @JoinColumn(name = "id_rol")
-    private Rol rol;
+    @JoinColumn(name = "role_id")
+    private Role role;
 
     @NaturalId
     @NotBlank
@@ -37,12 +35,16 @@ public class User {
     @Size(max = 100)
     private String password;
 
+    @JsonIgnore
+    @OneToMany(cascade ={CascadeType.ALL}, mappedBy = "user")
+    private Set<Booking> bookings;
+
     public User() {
     }
 
-    public User(String username, Rol rol, String email, String password) {
+    public User(String username, Role role, String email, String password) {
         this.username = username;
-        this.rol = rol;
+        this.role = role;
         this.email = email;
         this.password = password;
     }
@@ -79,19 +81,19 @@ public class User {
         this.username = username;
     }
 
-    public Rol getRol() {
-        return rol;
+    public Role getRole() {
+        return role;
     }
 
-    public void setRol(Rol rol) {
-        this.rol = rol;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
-    public Set<Rezervare> getRezervari() {
-        return rezervari;
+    public Set<Booking> getBookings() {
+        return bookings;
     }
 
-    public void setRezervari(Set<Rezervare> rezervari) {
-        this.rezervari = rezervari;
+    public void setBookings(Set<Booking> bookings) {
+        this.bookings = bookings;
     }
 }

@@ -1,6 +1,6 @@
 package com.bestem.security;
 
-import com.bestem.model.Rol;
+import com.bestem.model.Role;
 import com.bestem.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
@@ -35,10 +35,10 @@ public class UserPrincipal implements UserDetails {
     }
 
     public static UserPrincipal create(User user) {
-        List<Rol> roles = new ArrayList();
-        roles.add(user.getRol());
+        List<Role> roles = new ArrayList();
+        roles.add(user.getRole());
         List<GrantedAuthority> authorities = roles.stream().map(role ->
-                new SimpleGrantedAuthority(role.getNume().name())
+                new SimpleGrantedAuthority(role.getName().name())
         ).collect(Collectors.toList());
 
         return new UserPrincipal(

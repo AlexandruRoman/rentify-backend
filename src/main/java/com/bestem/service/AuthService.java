@@ -1,10 +1,10 @@
 package com.bestem.service;
 
 import com.bestem.exception.AppException;
-import com.bestem.model.NumeRol;
-import com.bestem.model.Rol;
+import com.bestem.model.RoleName;
+import com.bestem.model.Role;
 import com.bestem.model.User;
-import com.bestem.repository.RolRepository;
+import com.bestem.repository.RoleRepository;
 import com.bestem.repository.UserRepository;
 import com.bestem.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,25 +14,22 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Service
 public class AuthService {
-    @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
+    private RoleRepository roleRepository;
+    private AuthenticationManager authenticationManager;
+    private PasswordEncoder passwordEncoder;
+    private JwtTokenProvider tokenProvider;
 
-    @Autowired
-    RolRepository rolRepository;
-
-    @Autowired
-    AuthenticationManager authenticationManager;
-
-    @Autowired
-    PasswordEncoder passwordEncoder;
-
-    @Autowired
-    JwtTokenProvider tokenProvider;
+    public AuthService(UserRepository userRepository, RoleRepository roleRepository, AuthenticationManager authenticationManager, PasswordEncoder passwordEncoder, JwtTokenProvider tokenProvider) {
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+        this.authenticationManager = authenticationManager;
+        this.passwordEncoder = passwordEncoder;
+        this.tokenProvider = tokenProvider;
+    }
 
     public String signin(User user) {
         Authentication authentication = authenticationManager.authenticate(
@@ -46,8 +43,8 @@ public class AuthService {
         return jwt;
     }
 
-    public String signup(User signUpRequest, NumeRol numeRol){
-        Rol userRole = rolRepository.findByNume(numeRol)
+    public String signup(User signUpRequest, RoleName roleName){
+        Role userRole = roleRepository.findByName(roleName)
                 .orElseThrow(() -> new AppException("User Role not set."));
 
         User user = new User(signUpRequest.getUsername(), userRole,

@@ -3,35 +3,39 @@ package com.bestem.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.util.Date;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 /**
  * Created by Alex on 2/20/2018.
  */
 @Entity
-@Table(name = "sport")
-public class Sport {
+@Table(name = "company")
+public class Company {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private String name;
-    private String avatar;
-    private String description;
-    private long capacity;
-
 //    @JsonIgnore
     @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name = "company_id")
-    private Company company;
+    @JoinColumn(name = "location_id")
+    private Location location;
 
     @JsonIgnore
-    @OneToMany(cascade ={CascadeType.ALL}, mappedBy = "sport")
-    private Set<Booking> bookings;
+    @OneToMany(cascade ={CascadeType.ALL}, mappedBy = "company")
+    private Set<Sport> sports;
 
-    public Sport(){}
-    public Sport(String name) {
+    private String avatar;
+
+    private String description;
+
+    @NotNull
+    private String name;
+
+    public Company(){}
+
+    public Company(String name) {
         this.name = name;
     }
 
@@ -67,27 +71,19 @@ public class Sport {
         this.description = description;
     }
 
-    public long getCapacity() {
-        return capacity;
+    public Location getLocation() {
+        return location;
     }
 
-    public void setCapacity(long capacity) {
-        this.capacity = capacity;
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
-    public Set<Booking> getBookings() {
-        return bookings;
+    public Set<Sport> getSports() {
+        return sports;
     }
 
-    public void setBookings(Set<Booking> bookings) {
-        this.bookings = bookings;
-    }
-
-    public Company getCompany() {
-        return company;
-    }
-
-    public void setCompany(Company company) {
-        this.company = company;
+    public void setSports(Set<Sport> sports) {
+        this.sports = sports;
     }
 }

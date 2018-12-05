@@ -1,4 +1,4 @@
 # Backend for a hotel room booking app
 
-Stack: SpringBoot, Hibernate
+Stack: SpringBoot, Hibernate\
 Language: Java
